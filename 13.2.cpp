@@ -3,13 +3,13 @@
 
 using namespace std;
 
-// The function of the Gaussian-Jordan step-by-step matrix reduction
+// Here is the Gaussian-Jordan step-by-step matrix reduction
 void gauss_jordan(int M, int N, double **A) {
     for (int k = 0; k < M; k++) {
         int i_max = k;
         double max = A[k][k];
 
-        // Find a maximal element in k-column
+        // A way to find a maximal element in k-column
         for (int i = k + 1; i < M; i++) {
             if (abs(A[i][k]) > abs(max)) {
                 i_max = i;
@@ -17,14 +17,14 @@ void gauss_jordan(int M, int N, double **A) {
             }
         }
 
-        // Swap k-string with i_max-line
+        // Here we just swap k-string with i_max-line
         for (int j = k; j <= N; j++) {
             double temp = A[k][j];
             A[k][j] = A[i_max][j];
             A[i_max][j] = temp;
         }
 
-        // Top triangular view
+        // here is the pop triangular view
         for (int i = k + 1; i < M; i++) {
             double c = -A[i][k] / A[k][k];
             for (int j = k; j <= N; j++) {
@@ -34,7 +34,7 @@ void gauss_jordan(int M, int N, double **A) {
         }
     }
 
-    // Diagonal view
+    // checking diagonal view
     for (int k = M - 1; k >= 0; k--) {
         for (int i = k - 1; i >= 0; i--) {
             double c = -A[i][k] / A[k][k];
@@ -66,11 +66,11 @@ int main() {
         }
     }
 
-    // Induce matrix reduction function to step-like
+    // Here is matrix reduction function to step-like
     gauss_jordan(M, N, A);
     ofstream fout("output.txt");
 
-    // Check if the system has a solution
+    // A way of checking for system's solution
     bool SolutionExists = true;
     for (int i = 0; i < M; i++) {
         bool ZeroRow = true;
@@ -92,7 +92,7 @@ int main() {
         return 0;
     }
     else
-    {    // Check if the system has a unique solution
+    {    // A way of checking for system's unique solution
     bool Unique = true;
     for (int i = 0; i < M; i++) {
         bool ZeroRow = true;
